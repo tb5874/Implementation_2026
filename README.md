@@ -6,7 +6,7 @@ This repository contains the implementation for a paper currently under review.
 
 The code provides the model architecture and core components used in the experiments.
 
-[ Information ]
+# Information
 network_01.py and network_02.py contain the implementations of the models presented in the paper,
 while subnetwork_01.py and subnetwork_02.py contain the implementations of the sequence models.
 
@@ -15,7 +15,9 @@ which are implemented in the files network_01.py and network_02.py.
 
 The description of initial_model is provided in the appendix.
 
-[ Argument ]
+# Argument
+For enhanced_model, enhanced_variant_model calss
+
 seq_option
 	tsh ( transformer-single-head )
 	tmh ( transformer-multi-head )
@@ -28,8 +30,10 @@ input_dim
 hidden_dim
 	This argument represents the dimensionality of the output.
 
-[ Input ]
-Input shape is [ batch, sequence length, input shape ]
+# Input 
+Input shape is [batch, sequence length, input shape]
 
-[ Output ]
-Output shape is [ batch, hidden shape ]
+# Output
+The output has shape ([batch,hidden_dim],[input_dim]).
+The [batch,hidden_dim] component represents the learned representation,
+while the [input_dim] component corresponds to the weight.
