@@ -19,16 +19,19 @@ The description of initial_model is provided in the appendix.
 For enhanced_model, enhanced_variant_model calss
 
 seq_option
-	tsh ( transformer-single-head )
-	tmh ( transformer-multi-head )
-	gru ( gated-recurrent-unit )
-	mamba ( not yet )
+- tsh ( transformer-single-head )
+- tmh ( transformer-multi-head )
+- gru ( gated-recurrent-unit )
+ -mamba ( not yet )
+ 
 seq_dim
-	This argument represents the sequence length to be input into the sequence model.
+- This argument represents the sequence length to be input into the sequence model.
+
 input_dim
-	This argument represents the dimensionality of the input.
+- This argument represents the dimensionality of the input.
+
 hidden_dim
-	This argument represents the dimensionality of the output.
+- This argument represents the dimensionality of the output.
 
 # Input 
 Input shape is [batch, sequence length, input shape]
