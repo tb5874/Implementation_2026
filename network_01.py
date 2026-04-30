@@ -10,7 +10,7 @@ from . import network_sub_01
 
 from . import network_sub_02
 
-class initial_variant_model(torch.nn.Module):
+class initial_model(torch.nn.Module):
 
     def __init__(self, seq_option, seq_dim, input_dim, hidden_dim):
 
@@ -47,12 +47,7 @@ class initial_variant_model(torch.nn.Module):
         start_x = self.seq_start(input_x)
         encoder_x = self.seq_encoder(start_x)
         get_head = self.seq_head(encoder_x)
-        get_softplus = 1.0 + torch.nn.functional.softplus(get_head)
-        get_w = get_softplus / (1.0 + get_softplus/100.0)
-        get_round = torch.round(get_w)
-        get_int = get_w + (get_round - get_w).detach()
-        get_xw = input_x[:,-1,:] * get_int
-        get_mlp = self.seq_mlp(get_xw)
+        get_mlp = self.seq_mlp(get_head)
         get_add = self.seq_add(get_mlp)
         get_res1 = ( get_mlp + get_add )
         get_norm1 = self.seq_norm1(get_res1)
@@ -61,13 +56,14 @@ class initial_variant_model(torch.nn.Module):
         get_norm2 = self.seq_norm2(get_res2)
         get_last = self.seq_last(get_norm2)
 
-        return get_last, get_int
+        return get_last, 0
 
-class enhanced_variant_model(torch.nn.Module):
+class enhanced_model(torch.nn.Module):
 
     def __init__(self, seq_option, seq_dim, input_dim, hidden_dim):
 
         super().__init__()
+
         mid_dim = 128
         if ( input_dim >= mid_dim ):
             mid_dim = input_dim * 4
@@ -97,13 +93,11 @@ class enhanced_variant_model(torch.nn.Module):
 
     def forward(self, input_x):
 
+
         start_x = self.seq_start(input_x)
         encoder_x = self.seq_encoder(start_x)
         get_head = self.seq_head(encoder_x)
-        get_softplus = torch.nn.functional.softplus(get_head)
-        get_w = get_softplus / (1.0 + get_softplus/100.0)
-        get_xw = input_x[:,-1,:] * get_w
-        get_mlp = self.seq_mlp(get_xw)
+        get_mlp = self.seq_mlp(get_head)
         get_add = self.seq_add(get_mlp)
         get_res1 = ( get_mlp + get_add )
         get_norm1 = self.seq_norm1(get_res1)
@@ -112,4 +106,4 @@ class enhanced_variant_model(torch.nn.Module):
         get_norm2 = self.seq_norm2(get_res2)
         get_last = self.seq_last(get_norm2)
 
-        return get_last, get_w
+        return get_last, 0

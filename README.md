@@ -9,13 +9,15 @@ The code provides the model architecture and core components used in the experim
 
 ## Information
 
-- `network_01.py` and `network_02.py` contain the implementations of the models presented in the paper.  
+- `network_00.py`,`network_01.py` and `network_02.py` contain the implementations of the models presented in the paper.  
 - `subnetwork_01.py` and `subnetwork_02.py` contain the implementations of the sequence models.
 
 The models used in the main text of the paper are `enhanced_model` and `enhanced_variant_model`,  
 which are implemented in `network_01.py` and `network_02.py`.
 
 The description of `initial_model` is provided in the appendix.
+
+`network_00.py` serves as the baseline model.
 
 ---
 
